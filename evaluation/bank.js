@@ -154,12 +154,10 @@ app.get("/master/:id",async(req,res)=>{
  }
  
  })
-
- 
   
 app.get("/master/:id",async(req,res)=>{
     try{
-     const master=await Master.findById(req.params.id).populate({path:"user_id"}).populate({path:"saving_id",select:["balance","account_numb"]}).lean().exec()
+     const master=await Master.findById().populate({path:"user_id",select:["account_numb","balance"]}).lean().exec()
    return  res.status(200).send(master)
  
     }
